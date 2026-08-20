@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UMRoomFaultReporter | Home</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- FIRST TIME VISITOR DISCLAIMER MODAL -->
+    <div id="disclaimerModal" class="modal-overlay">
+        <div class="modal-content">
+            <h2>Academic Project Notice</h2>
+            <p><strong>Disclaimer:</strong> This system is a student academic project developed for Information Management coursework. It is <strong>NOT</strong> an official application or system of the University of Mindanao Digos College (UMDC).</p>
+            <p>All official logos, trademarks, and university names used herein remain the exclusive property of UMDC. This site is created strictly for educational and demonstration purposes only.</p>
+            <button id="closeModalBtn" class="btn btn-primary">I Understand</button>
+        </div>
+    </div>
+
+    <!-- HEADER & NAVIGATION -->
+    <header>
+        <div class="logo-container">
+            <a href="https://digos.umindanao.edu.ph/" target="_blank">
+                <img src="img/um-logo.png" alt="UM Logo" class="um-logo-img">
+            </a>
+            <div class="system-title">
+                <h1>UMRoomFaultReporter</h1>
+                <p>Classroom Fault Reporter</p>
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <a href="index.html" class="home-btn" aria-label="Home">
+                <svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v10h14V10"/><path d="M9.5 20v-6h5v6"/></svg>
+            </a>
+            <button class="menu-btn" id="menuToggle">☰</button>
+        </div>
+
+        <div class="dropdown-menu" id="dropdownMenu">
+            <a href="index.html">Home</a>
+            <a href="report.html">Report Issue</a>
+            <a href="reports.html">Active Reports</a>
+            <a href="about.html">About the System</a>
+            <a href="login.html">Admin Login</a>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="hero">
+        <h2>Report Classroom Issues Instantly</h2>
+        <p>This system allows students and faculty members to report damaged, defective, or non-functioning classroom equipment and facilities to the university maintenance team.</p>
+
+        <div class="btn-container">
+            <a href="report.html" class="btn btn-primary">REPORT A FAULT / DAMAGE</a>
+            <a href="reports.html" class="btn btn-secondary">VIEW ACTIVE REPORTS</a>
+        </div>
+    </main>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

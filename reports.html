@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UMRoomFaultReporter | Active Reports</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/reports.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <a href="https://digos.umindanao.edu.ph/" target="_blank">
+                <img src="img/um-logo.png" alt="UM Logo" class="um-logo-img">
+            </a>
+            <div class="system-title">
+                <h1>UMRoomFaultReporter</h1>
+                <p>Classroom Fault Reporter</p>
+            </div>
+        </div>
+        <div class="header-actions">
+            <a href="index.html" class="home-btn" aria-label="Home">
+                <svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v10h14V10"/><path d="M9.5 20v-6h5v6"/></svg>
+            </a>
+            <button class="menu-btn" id="menuToggle">☰</button>
+        </div>
+        <div class="dropdown-menu" id="dropdownMenu">
+            <a href="index.html">Home</a>
+            <a href="report.html">Report Issue</a>
+            <a href="reports.html">Active Reports</a>
+            <a href="about.html">About the System</a>
+            <a href="login.html">Admin Login</a>
+        </div>
+    </header>
+
+    <main class="reports-container">
+        <h2>Active & Recent Fault Reports</h2>
+        <p>Browse reported classroom issues and track their progress.</p>
+
+        <div class="filter-bar">
+            <input type="text" id="searchInput" placeholder="Search by room (e.g., B15) or report code...">
+        </div>
+
+        <div id="reportsSections">
+            <p class="loading-text">Loading reports from database...</p>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/main.js"></script>
+    <script src="js/reports.js"></script>
+</body>
+</html>

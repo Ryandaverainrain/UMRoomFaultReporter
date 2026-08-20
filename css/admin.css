@@ -1,0 +1,200 @@
+/* --- ADMIN DASHBOARD STYLES --- */
+.admin-container {
+    max-width: 900px;
+    margin: 36px auto;
+    padding: 0 20px;
+}
+
+.admin-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 26px;
+    border-bottom: 2px solid var(--border-soft);
+    padding-bottom: 16px;
+}
+
+.admin-header-row h2 {
+    color: var(--um-maroon);
+    font-size: 1.5rem;
+}
+
+.logout-btn {
+    background: var(--text-dark);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: 0.2s ease;
+}
+
+.logout-btn:hover {
+    background: #000;
+}
+
+/* Status Sections */
+.admin-status-section {
+    margin-bottom: 30px;
+}
+
+.admin-status-section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 12px;
+    padding-left: 12px;
+    border-left: 4px solid var(--border-soft);
+}
+
+.admin-status-section-title.section-reported { border-color: var(--status-reported-text); }
+.admin-status-section-title.section-processing { border-color: var(--status-processing-text); }
+.admin-status-section-title.section-completed { border-color: var(--status-completed-text); }
+
+.admin-status-section-count {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    background: var(--bg-light);
+    padding: 2px 9px;
+    border-radius: 20px;
+}
+
+.admin-empty-note {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    padding: 14px;
+    background: var(--bg-light);
+    border-radius: 10px;
+}
+
+/* Ticket Card */
+.admin-ticket-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 3px 14px rgba(0,0,0,0.06);
+    border: 1px solid var(--border-soft);
+    padding: 20px 22px;
+    margin-bottom: 16px;
+}
+
+.admin-ticket-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.admin-ticket-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.admin-ticket-code {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.admin-ticket-details {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    margin: 3px 0;
+}
+
+.admin-ticket-details strong {
+    color: var(--text-dark);
+}
+
+.admin-ticket-desc {
+    font-size: 0.88rem;
+    color: var(--text-dark);
+    background: var(--bg-light);
+    padding: 10px 12px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.admin-image-link {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 0.82rem;
+    color: var(--um-maroon);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.admin-image-link:hover {
+    text-decoration: underline;
+}
+
+/* Status toggle buttons */
+.status-toggle-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border-soft);
+}
+
+.status-btn {
+    flex: 1;
+    padding: 9px 10px;
+    border-radius: 8px;
+    border: 1.5px solid var(--border-soft);
+    background: #fff;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: all 0.15s ease;
+}
+
+.status-btn:hover {
+    border-color: var(--um-maroon);
+}
+
+.status-btn.active-reported {
+    background: var(--status-reported-bg);
+    color: var(--status-reported-text);
+    border-color: var(--status-reported-bg);
+}
+
+.status-btn.active-processing {
+    background: var(--status-processing-bg);
+    color: var(--status-processing-text);
+    border-color: var(--status-processing-bg);
+}
+
+.status-btn.active-completed {
+    background: var(--status-completed-bg);
+    color: var(--status-completed-text);
+    border-color: var(--status-completed-bg);
+}
+
+.delete-btn {
+    padding: 9px 14px;
+    border-radius: 8px;
+    border: 1.5px solid #F3C6C6;
+    background: #FDF1F1;
+    color: #B00020;
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.delete-btn:hover {
+    background: #B00020;
+    color: #fff;
+    border-color: #B00020;
+}

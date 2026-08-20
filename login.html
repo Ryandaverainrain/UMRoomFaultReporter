@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UMRoomFaultReporter | Admin Login</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .login-container {
+            max-width: 400px;
+            margin: 70px auto;
+            background: var(--card-bg);
+            padding: 30px 28px;
+            border-radius: 14px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+            border: 1px solid var(--border-soft);
+            text-align: center;
+        }
+        .login-container h2 {
+            color: var(--um-maroon);
+            margin-bottom: 6px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 6px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 11px 12px;
+            border: 1.5px solid var(--border-soft);
+            border-radius: 8px;
+            font-size: 0.92rem;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--um-maroon);
+        }
+        .error-message {
+            color: #B00020;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <a href="https://digos.umindanao.edu.ph/" target="_blank">
+                <img src="img/um-logo.png" alt="UM Logo" class="um-logo-img">
+            </a>
+            <div class="system-title">
+                <h1>UMRoomFaultReporter</h1>
+                <p>Classroom Fault Reporter</p>
+            </div>
+        </div>
+        <div class="header-actions">
+            <a href="index.html" class="home-btn" aria-label="Home">
+                <svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v10h14V10"/><path d="M9.5 20v-6h5v6"/></svg>
+            </a>
+            <button class="menu-btn" id="menuToggle">☰</button>
+        </div>
+        <div class="dropdown-menu" id="dropdownMenu">
+            <a href="index.html">Home</a>
+            <a href="report.html">Report Issue</a>
+            <a href="reports.html">Active Reports</a>
+            <a href="about.html">About the System</a>
+            <a href="login.html">Admin Login</a>
+        </div>
+    </header>
+
+    <main class="login-container">
+        <h2>Administrator Login</h2>
+        <p style="margin-bottom: 20px; color: var(--text-muted); font-size: 0.88rem;">Authorized maintenance personnel only.</p>
+
+        <p id="errorMessage" class="error-message">Invalid email or password.</p>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="adminEmail">Email Address</label>
+                <input type="email" id="adminEmail" placeholder="admin@umdc.edu.ph" required>
+            </div>
+            <div class="form-group">
+                <label for="adminPassword">Password</label>
+                <input type="password" id="adminPassword" placeholder="••••••••" required>
+            </div>
+            <button type="submit" id="loginBtn" class="btn btn-primary" style="margin-top: 10px;">Log In</button>
+        </form>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>

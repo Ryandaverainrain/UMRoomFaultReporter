@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UMRoomFaultReporter | About the System</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .about-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .about-card {
+            background: var(--card-bg);
+            padding: 28px;
+            border-radius: 14px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+            margin-bottom: 20px;
+            border-top: 4px solid var(--um-maroon);
+        }
+
+        .about-card h2 {
+            color: var(--um-maroon);
+            margin-bottom: 14px;
+            font-size: 1.2rem;
+        }
+
+        .about-card p {
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 12px;
+            font-size: 0.92rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <a href="https://digos.umindanao.edu.ph/" target="_blank">
+                <img src="img/um-logo.png" alt="UM Logo" class="um-logo-img">
+            </a>
+            <div class="system-title">
+                <h1>UMRoomFaultReporter</h1>
+                <p>Classroom Fault Reporter</p>
+            </div>
+        </div>
+        <div class="header-actions">
+            <a href="index.html" class="home-btn" aria-label="Home">
+                <svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v10h14V10"/><path d="M9.5 20v-6h5v6"/></svg>
+            </a>
+            <button class="menu-btn" id="menuToggle">☰</button>
+        </div>
+        <div class="dropdown-menu" id="dropdownMenu">
+            <a href="index.html">Home</a>
+            <a href="report.html">Report Issue</a>
+            <a href="reports.html">Active Reports</a>
+            <a href="about.html">About the System</a>
+            <a href="login.html">Admin Login</a>
+        </div>
+    </header>
+
+    <main class="about-container">
+
+        <div class="about-card">
+            <h2>About UMRoomFaultReporter</h2>
+            <p><strong>UMRoomFaultReporter</strong> is a centralized web application designed to streamline the reporting and tracking of broken or damaged facility equipment in classrooms across the University of Mindanao Digos College (UMDC).</p>
+            <p>This system allows students, faculty, and university personnel to quickly report issues—such as broken air conditioners, faulty projectors, damaged chairs, and lighting errors—so the campus maintenance team can address them promptly.</p>
+        </div>
+
+        <div class="about-card">
+            <h2>Developer's Note & Educational Purpose</h2>
+            <p>This system was created purely as an educational project to fulfill the coursework requirements for my <strong>Information Management</strong> class.</p>
+            <p>I am incredibly proud to share that <strong>this is my very first website and fully functional web application!</strong> Building this system from scratch—from designing the frontend interface to wiring it up to a live PostgreSQL cloud database via Supabase—has been an amazing learning journey into the world of software development.</p>
+        </div>
+
+        <div class="about-card">
+            <h2>Feedback & Suggestions</h2>
+            <p>Because this is my first major development project, I am actively learning and trying to improve my coding skills. I highly welcome any feedback, bug reports, or suggestions for improvement from my professors, classmates, and users.</p>
+            <p>Your insights will help me refine this system and grow as a future IT professional.</p>
+        </div>
+
+        <div class="about-card">
+            <h2>Copyright Notice & Disclaimer</h2>
+            <p>This application is <strong>NOT</strong> an official system or public service of the University of Mindanao Digos College (UMDC). It is a student prototype hosted for demonstration purposes only.</p>
+            <p>All university logos, names, insignias, and trademarks used within this project remain the exclusive intellectual property of UMDC. No copyright infringement is intended.</p>
+        </div>
+    </main>
+
+    <script src="js/main.js"></script>
+    <script>
+        let typedKeys = '';
+        const secretCode = 'devryan';
+
+        document.addEventListener('keydown', (event) => {
+            typedKeys += event.key.toLowerCase();
+            if (typedKeys.length > secretCode.length) {
+                typedKeys = typedKeys.substring(typedKeys.length - secretCode.length);
+            }
+            if (typedKeys === secretCode) {
+                window.location.href = 'dev.html';
+            }
+        });
+    </script>
+</body>
+</html>
