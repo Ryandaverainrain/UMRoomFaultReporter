@@ -201,7 +201,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const pw = document.getElementById("forgotNewPassword").value;
         const confirmPw = document.getElementById("forgotConfirmPassword").value;
 
-        if (code.length !== 6) { showError("forgotError", "Enter the 6-digit code from your email."); return; }
+        if (code.length !== 8) { showError("forgotError", "Enter the 8-character code from your email."); return; }
         if (pw.length < 6) { showError("forgotError", "Password must be at least 6 characters."); return; }
         if (pw !== confirmPw) { showError("forgotError", "Passwords don't match."); return; }
 
@@ -234,7 +234,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const pw = document.getElementById("activatePassword").value;
         const confirmPw = document.getElementById("activateConfirmPassword").value;
 
-        if (code.length !== 6) { showError("activateError", "Enter the 6-digit code from your email."); return; }
+        if (code.length !== 8) { showError("activateError", "Enter the 8-character code from your email."); return; }
         if (pw.length < 6) { showError("activateError", "Password must be at least 6 characters."); return; }
         if (pw !== confirmPw) { showError("activateError", "Passwords don't match."); return; }
 
@@ -295,7 +295,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const confirmPw = document.getElementById("registerConfirmPassword").value;
         const email = document.getElementById("regEmail").value.trim().toLowerCase();
 
-        if (code.length !== 6) { showError("registerOtpError", "Enter the 6-digit code from your email."); return; }
+        if (code.length !== 8) { showError("registerOtpError", "Enter the 8-character code from your email."); return; }
         if (pw.length < 6) { showError("registerOtpError", "Password must be at least 6 characters."); return; }
         if (pw !== confirmPw) { showError("registerOtpError", "Passwords don't match."); return; }
 
