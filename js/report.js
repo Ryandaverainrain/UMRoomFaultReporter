@@ -46,42 +46,61 @@ function startCooldown() {
 }
 
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+
+    // --- REQUIRE LOGIN: bounce to student-login.html if not authenticated ---
+    const { data: { session } } = await supabaseClient.auth.getSession();
+    if (!session) {
+        window.location.href = "student-login.html";
+        return;
+    }
+
+    // Look up this student's profile to prefill the report and show who's logged in
+    let studentProfile = null;
+    try {
+        const { data, error } = await supabaseClient
+            .from("students")
+            .select("*")
+            .eq("user_id", session.user.id)
+            .maybeSingle();
+        if (error) throw error;
+        studentProfile = data;
+    } catch (err) {
+        console.error("Error loading student profile:", err);
+    }
+
+    if (studentProfile) {
+        document.getElementById("sessionBar").style.display = "flex";
+        document.getElementById("sessionInfo").textContent =
+            `Logged in as ${studentProfile.first_name} ${studentProfile.last_name} (${studentProfile.student_id})`;
+    }
+
+    document.getElementById("logoutBtn").addEventListener("click", async () => {
+        await supabaseClient.auth.signOut();
+        window.location.href = "index.html";
+    });
 
     // Check if this device is still in a cooldown period from a recent submission
     if (getRemainingCooldown() > 0) {
         startCooldown();
     }
 
-    const reporterType = document.getElementById("reporterType");
-    const idLabel = document.getElementById("idLabel");
-    const reporterId = document.getElementById("reporterId");
     const classroomName = document.getElementById("classroomName");
     const consentCheck = document.getElementById("consentCheck");
     const submitBtn = document.getElementById("submitBtn");
     const faultForm = document.getElementById("faultForm");
 
-    // 1. Dynamically change the ID Label based on Student/Professor selection
-    reporterType.addEventListener("change", (event) => {
-        idLabel.textContent = event.target.value === "Professor" ? "Employee ID" : "Student ID";
-    });
-
-    // 2. Student/Employee ID: numbers only
-    reporterId.addEventListener("input", (event) => {
-        event.target.value = event.target.value.replace(/[^0-9]/g, "");
-    });
-
-    // 3. Classroom name: auto-uppercase for consistency (e.g. "b15" -> "B15")
+    // Classroom name: auto-uppercase for consistency (e.g. "b15" -> "B15")
     classroomName.addEventListener("input", (event) => {
         event.target.value = event.target.value.toUpperCase();
     });
 
-    // 4. Enable the Submit button ONLY if the consent checkbox is ticked
+    // Enable the Submit button ONLY if the consent checkbox is ticked
     consentCheck.addEventListener("change", (event) => {
         submitBtn.disabled = !event.target.checked;
     });
 
-    // 5. Handle Form Submission to Supabase
+    // Handle Form Submission to Supabase
     faultForm.addEventListener("submit", async (event) => {
         event.preventDefault();
 
@@ -115,9 +134,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const newTicket = {
                 report_code: reportCode,
-                reporter_type: reporterType.value,
-                reporter_name: document.getElementById("reporterName").value,
-                reporter_id_number: reporterId.value,
+                reporter_type: "Student",
+                reporter_name: studentProfile ? `${studentProfile.first_name} ${studentProfile.last_name}` : "Unknown",
+                reporter_id_number: studentProfile ? studentProfile.student_id : "",
+                student_user_id: session.user.id,
                 classroom_name: classroomName.value,
                 equipment_name: document.getElementById("equipmentName").value,
                 location_in_room: document.getElementById("locationInRoom").value,

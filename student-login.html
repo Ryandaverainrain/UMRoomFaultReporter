@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UMRoomFaultReporter | Student Login</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/report.css">
+    <link rel="stylesheet" href="css/student-login.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <a href="https://digos.umindanao.edu.ph/" target="_blank">
+                <img src="img/um-logo.png" alt="UM Logo" class="um-logo-img">
+            </a>
+            <div class="system-title">
+                <h1>UMRoomFaultReporter</h1>
+                <p>Classroom Fault Reporter</p>
+            </div>
+        </div>
+        <div class="header-actions">
+            <a href="index.html" class="home-btn" aria-label="Home">
+                <svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v10h14V10"/><path d="M9.5 20v-6h5v6"/></svg>
+            </a>
+            <button class="menu-btn" id="menuToggle">☰</button>
+        </div>
+        <div class="dropdown-menu" id="dropdownMenu">
+            <a href="index.html">Home</a>
+            <a href="reports.html">Active Reports</a>
+            <a href="about.html">About the System</a>
+            <a href="login.html">Admin Login</a>
+        </div>
+    </header>
+
+    <main class="form-container">
+        <h2>Student Login</h2>
+        <p class="subtext">Log in to submit a fault report.</p>
+
+        <!-- ============ STEP 1: FIND BY STUDENT ID ============ -->
+        <div id="stepFind">
+            <div class="form-group">
+                <label for="findStudentId">Student ID</label>
+                <input type="text" id="findStudentId" inputmode="numeric" maxlength="5" placeholder="12345" required>
+            </div>
+            <p class="field-error" id="findError"></p>
+            <button type="button" id="findBtn" class="btn btn-primary">Find My Account</button>
+        </div>
+
+        <!-- ============ BRANCH A: ACCOUNT EXISTS + ACTIVATED ============ -->
+        <div id="stepLogin" style="display:none;">
+            <div class="info-box">
+                <p><strong>Name</strong> <span id="loginName"></span></p>
+                <p><strong>Program</strong> <span id="loginProgram"></span></p>
+                <p><strong>Email</strong> <span id="loginEmail"></span></p>
+            </div>
+
+            <div class="form-group">
+                <label for="loginPassword">Password</label>
+                <div class="password-field">
+                    <input type="password" id="loginPassword" placeholder="••••••••" required>
+                    <button type="button" class="password-toggle-btn" data-target="loginPassword">SHOW</button>
+                </div>
+            </div>
+            <p class="field-error" id="loginError"></p>
+            <button type="button" id="loginBtn" class="btn btn-primary">Log In</button>
+            <button type="button" id="forgotPasswordLink" class="link-btn">Forgot password?</button>
+        </div>
+
+        <!-- ============ BRANCH A2: FORGOT PASSWORD (OTP RESET) ============ -->
+        <div id="stepForgotOtp" style="display:none;">
+            <p class="step-note">We'll send a 6-digit code to <strong id="forgotEmailDisplay"></strong>. Enter it below along with your new password.</p>
+            <button type="button" id="forgotSendCodeBtn" class="btn btn-secondary">Send Code</button>
+
+            <div id="forgotOtpFields" class="otp-sub-step" style="display:none;">
+                <div class="form-group">
+                    <label for="forgotCode">6-Digit Code</label>
+                    <input type="text" id="forgotCode" inputmode="numeric" maxlength="6" placeholder="123456" required>
+                </div>
+                <div class="form-group">
+                    <label for="forgotNewPassword">New Password</label>
+                    <div class="password-field">
+                        <input type="password" id="forgotNewPassword" placeholder="At least 6 characters" required>
+                        <button type="button" class="password-toggle-btn" data-target="forgotNewPassword">SHOW</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="forgotConfirmPassword">Re-enter Password</label>
+                    <div class="password-field">
+                        <input type="password" id="forgotConfirmPassword" placeholder="Re-enter password" required>
+                        <button type="button" class="password-toggle-btn" data-target="forgotConfirmPassword">SHOW</button>
+                    </div>
+                </div>
+                <p class="field-error" id="forgotError"></p>
+                <button type="button" id="forgotResetBtn" class="btn btn-primary">Verify &amp; Reset Password</button>
+            </div>
+        </div>
+
+        <!-- ============ BRANCH B: ACCOUNT EXISTS, NOT ACTIVATED ============ -->
+        <div id="stepActivate" style="display:none;">
+            <div class="info-box">
+                <p><strong>Name</strong> <span id="activateName"></span></p>
+                <p><strong>Program</strong> <span id="activateProgram"></span></p>
+                <p><strong>Email</strong> <span id="activateEmail"></span></p>
+            </div>
+            <p class="step-note">This account hasn't been activated yet. Set up a password to activate it — we'll send a 6-digit code to the email above to confirm it's you.</p>
+            <button type="button" id="activateSendCodeBtn" class="btn btn-secondary">Send Code</button>
+
+            <div id="activateOtpFields" class="otp-sub-step" style="display:none;">
+                <div class="form-group">
+                    <label for="activateCode">6-Digit Code</label>
+                    <input type="text" id="activateCode" inputmode="numeric" maxlength="6" placeholder="123456" required>
+                </div>
+                <div class="form-group">
+                    <label for="activatePassword">Create Password</label>
+                    <div class="password-field">
+                        <input type="password" id="activatePassword" placeholder="At least 6 characters" required>
+                        <button type="button" class="password-toggle-btn" data-target="activatePassword">SHOW</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="activateConfirmPassword">Re-enter Password</label>
+                    <div class="password-field">
+                        <input type="password" id="activateConfirmPassword" placeholder="Re-enter password" required>
+                        <button type="button" class="password-toggle-btn" data-target="activateConfirmPassword">SHOW</button>
+                    </div>
+                </div>
+                <p class="field-error" id="activateError"></p>
+                <button type="button" id="activateBtn" class="btn btn-primary">Verify &amp; Activate Account</button>
+            </div>
+        </div>
+
+        <!-- ============ BRANCH C: NO ACCOUNT — REGISTER ============ -->
+        <div id="stepRegister" style="display:none;">
+            <p class="step-note">No account found for that Student ID. Fill in your details to create one.</p>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="regLastName">Last Name</label>
+                    <input type="text" id="regLastName" maxlength="40" placeholder="Dela Cruz" required>
+                </div>
+                <div class="form-group">
+                    <label for="regFirstName">First Name</label>
+                    <input type="text" id="regFirstName" maxlength="40" placeholder="Juan" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="regProgram">Year &amp; Program</label>
+                <input type="text" id="regProgram" maxlength="60" placeholder="2nd Year, BSIT" required>
+            </div>
+
+            <div class="form-group">
+                <label for="regEmail">UMDC Email</label>
+                <input type="text" id="regEmail" placeholder="delacruz.juan@umindanao.edu.ph" required>
+                <small>Must end in @umindanao.edu.ph</small>
+            </div>
+
+            <p class="field-error" id="registerError"></p>
+            <button type="button" id="registerSendCodeBtn" class="btn btn-secondary">Send Code</button>
+
+            <div id="registerOtpFields" class="otp-sub-step" style="display:none;">
+                <div class="form-group">
+                    <label for="registerCode">6-Digit Code</label>
+                    <input type="text" id="registerCode" inputmode="numeric" maxlength="6" placeholder="123456" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Create Password</label>
+                    <div class="password-field">
+                        <input type="password" id="registerPassword" placeholder="At least 6 characters" required>
+                        <button type="button" class="password-toggle-btn" data-target="registerPassword">SHOW</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="registerConfirmPassword">Re-enter Password</label>
+                    <div class="password-field">
+                        <input type="password" id="registerConfirmPassword" placeholder="Re-enter password" required>
+                        <button type="button" class="password-toggle-btn" data-target="registerConfirmPassword">SHOW</button>
+                    </div>
+                </div>
+                <p class="field-error" id="registerOtpError"></p>
+                <button type="button" id="registerCreateBtn" class="btn btn-primary">Verify &amp; Create Account</button>
+            </div>
+        </div>
+
+        <button type="button" id="startOverBtn" class="link-btn" style="display:none;">← Use a different Student ID</button>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/main.js"></script>
+    <script src="js/student-login.js"></script>
+</body>
+</html>

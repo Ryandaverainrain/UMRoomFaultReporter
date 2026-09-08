@@ -1,0 +1,104 @@
+/* --- STUDENT LOGIN / ACCOUNT CSS --- */
+.step-note {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    line-height: 1.5;
+}
+
+.info-box {
+    background: var(--bg-light);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 18px;
+}
+
+.info-box p {
+    font-size: 0.88rem;
+    color: var(--text-dark);
+    margin: 3px 0;
+}
+
+.info-box p strong {
+    color: var(--text-muted);
+    font-weight: 600;
+    display: inline-block;
+    width: 84px;
+}
+
+.password-field {
+    position: relative;
+}
+
+.password-field input {
+    padding-right: 44px !important;
+}
+
+.password-toggle-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    padding: 4px 6px;
+}
+
+.password-toggle-btn:hover {
+    color: var(--um-maroon);
+}
+
+.field-error {
+    color: #B00020;
+    font-size: 0.8rem;
+    margin-top: 8px;
+    display: none;
+}
+
+.field-error.visible {
+    display: block;
+}
+
+.link-btn {
+    background: none;
+    border: none;
+    color: var(--um-maroon);
+    font-size: 0.83rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 0;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.otp-sub-step {
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px dashed var(--border-soft);
+}
+
+.session-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bg-light);
+    border-radius: 10px;
+    padding: 10px 16px;
+    margin-bottom: 18px;
+    font-size: 0.85rem;
+    color: var(--text-dark);
+}
+
+.session-bar button {
+    background: none;
+    border: none;
+    color: #B00020;
+    font-weight: 700;
+    font-size: 0.82rem;
+    cursor: pointer;
+}
