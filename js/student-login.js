@@ -42,6 +42,18 @@ async function verifyOtpAndSetPassword(email, code, password) {
     return data;
 }
 
+// --- Name ↔ email consistency check ---
+// UMDC emails follow lastname.firstname@umindanao.edu.ph (spaces removed,
+// lowercase). This confirms the typed name actually matches the typed
+// school email, so someone can't register with a fake/mismatched name —
+// they also can't change the domain itself, since that part is fixed.
+function namesMatchEmail(lastName, firstName, email) {
+    const cleanPart = (s) => s.toLowerCase().replace(/[^a-z]/g, "");
+    const expectedLocal = `${cleanPart(lastName)}.${cleanPart(firstName)}`;
+    const actualLocal = email.split("@")[0].toLowerCase();
+    return actualLocal === expectedLocal;
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
 
     // If already logged in, skip straight to the report form
@@ -256,7 +268,12 @@ document.addEventListener("DOMContentLoaded", async () => {
             return;
         }
         if (!email.endsWith("@umindanao.edu.ph")) {
-            showError("registerError", "Please use your @umindanao.edu.ph email.");
+            showError("registerError", "Please use your @umindanao.edu.ph email — no Gmail, iCloud, or other providers.");
+            return;
+        }
+        if (!namesMatchEmail(lastName, firstName, email)) {
+            showError("registerError",
+                `That email doesn't match your name. It should be lastname.firstname@umindanao.edu.ph — e.g. for ${firstName} ${lastName}, that'd be ${lastName.toLowerCase().replace(/[^a-z]/g, "")}.${firstName.toLowerCase().replace(/[^a-z]/g, "")}@umindanao.edu.ph`);
             return;
         }
 
