@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
     ["forgotCode", "activateCode", "registerCode"].forEach(id => {
         document.getElementById(id).addEventListener("input", (e) => {
-            e.target.value = e.target.value.replace(/[^0-9]/g, "").slice(0, 6);
+            e.target.value = e.target.value.replace(/[^0-9]/g, "").slice(0, 8);
         });
     });
 
