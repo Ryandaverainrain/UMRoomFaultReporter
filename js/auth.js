@@ -21,8 +21,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const email = document.getElementById("adminEmail").value;
             const password = document.getElementById("adminPassword").value;
 
-            loginBtn.textContent = "Authenticating...";
-            loginBtn.disabled = true;
+            loginBtn.textContent = "Log In";
+            UMRFR.setButtonLoading(loginBtn, true, "Authenticating...");
             errorMessage.style.display = "none";
 
             try {
@@ -41,8 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.error("Login error:", error.message);
                 errorMessage.textContent = "Invalid email or password.";
                 errorMessage.style.display = "block";
-                loginBtn.textContent = "Log In";
-                loginBtn.disabled = false;
+                UMRFR.setButtonLoading(loginBtn, false);
             }
         });
     }

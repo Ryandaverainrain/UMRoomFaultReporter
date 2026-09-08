@@ -32,13 +32,40 @@
     </header>
 
     <main class="admin-container">
-        <div class="admin-header-row">
-            <h2>Admin Dashboard</h2>
-            <button id="logoutBtn" class="logout-btn">Log Out</button>
+        <div id="adminCheckingMessage" style="text-align:center; padding: 60px 20px; color: var(--text-muted);">
+            <span class="btn-spinner" style="border-top-color: var(--um-maroon); border-color: rgba(122,12,30,0.25); border-top-color: var(--um-maroon);"></span>
+            Checking admin access...
         </div>
 
-        <div id="adminSections">
-            <p style="text-align:center; color: var(--text-muted); font-style: italic;">Loading reports from database...</p>
+        <div id="adminContent" style="display:none;">
+            <div class="admin-header-row">
+                <h2>Admin Dashboard</h2>
+                <button id="logoutBtn" class="logout-btn">Log Out</button>
+            </div>
+
+            <!-- SETTINGS: report cooldown duration -->
+            <div class="admin-settings-card">
+                <h3>Report Cooldown</h3>
+                <p class="admin-settings-note">How long a device must wait between report submissions.</p>
+                <div class="cooldown-select-row" id="cooldownSelectRow">
+                    <button type="button" class="cooldown-option-btn" data-minutes="1">1 min</button>
+                    <button type="button" class="cooldown-option-btn" data-minutes="5">5 min</button>
+                    <button type="button" class="cooldown-option-btn" data-minutes="10">10 min</button>
+                </div>
+            </div>
+
+            <!-- STUDENT ROSTER -->
+            <div class="admin-roster-card">
+                <h3>Student Roster</h3>
+                <p class="admin-settings-note">Everyone in the database, activated or not. Passwords and emails aren't shown here.</p>
+                <div id="rosterGrid" class="roster-grid">
+                    <p class="admin-empty-note">Loading roster...</p>
+                </div>
+            </div>
+
+            <div id="adminSections">
+                <p style="text-align:center; color: var(--text-muted); font-style: italic;">Loading reports from database...</p>
+            </div>
         </div>
     </main>
 

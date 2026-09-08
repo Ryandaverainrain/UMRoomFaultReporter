@@ -70,13 +70,13 @@
 
         <!-- ============ BRANCH A2: FORGOT PASSWORD (OTP RESET) ============ -->
         <div id="stepForgotOtp" style="display:none;">
-            <p class="step-note">We'll send a 8-character code to <strong id="forgotEmailDisplay"></strong>. Enter it below along with your new password.</p>
+            <p class="step-note">We'll send a 6-digit code to <strong id="forgotEmailDisplay"></strong>. Enter it below along with your new password.</p>
             <button type="button" id="forgotSendCodeBtn" class="btn btn-secondary">Send Code</button>
 
             <div id="forgotOtpFields" class="otp-sub-step" style="display:none;">
                 <div class="form-group">
-                    <label for="forgotCode">8-Character Code</label>
-                    <input type="text" id="forgotCode" inputmode="numeric" maxlength="8" placeholder="12345678" required>
+                    <label for="forgotCode">6-Digit Code</label>
+                    <input type="text" id="forgotCode" inputmode="numeric" maxlength="6" placeholder="123456" required>
                 </div>
                 <div class="form-group">
                     <label for="forgotNewPassword">New Password</label>
@@ -104,13 +104,13 @@
                 <p><strong>Program</strong> <span id="activateProgram"></span></p>
                 <p><strong>Email</strong> <span id="activateEmail"></span></p>
             </div>
-            <p class="step-note">This account hasn't been activated yet. Set up a password to activate it — we'll send a 8-character code to the email above to confirm it's you.</p>
+            <p class="step-note">This account hasn't been activated yet. Set up a password to activate it — we'll send a 6-digit code to the email above to confirm it's you.</p>
             <button type="button" id="activateSendCodeBtn" class="btn btn-secondary">Send Code</button>
 
             <div id="activateOtpFields" class="otp-sub-step" style="display:none;">
                 <div class="form-group">
-                    <label for="activateCode">8-Character Code</label>
-                    <input type="text" id="activateCode" inputmode="numeric" maxlength="8" placeholder="12345678" required>
+                    <label for="activateCode">6-Digit Code</label>
+                    <input type="text" id="activateCode" inputmode="numeric" maxlength="6" placeholder="123456" required>
                 </div>
                 <div class="form-group">
                     <label for="activatePassword">Create Password</label>
@@ -162,8 +162,8 @@
 
             <div id="registerOtpFields" class="otp-sub-step" style="display:none;">
                 <div class="form-group">
-                    <label for="registerCode">8-Character Code</label>
-                    <input type="text" id="registerCode" inputmode="numeric" maxlength="8" placeholder="12345678" required>
+                    <label for="registerCode">6-Digit Code</label>
+                    <input type="text" id="registerCode" inputmode="numeric" maxlength="6" placeholder="123456" required>
                 </div>
                 <div class="form-group">
                     <label for="registerPassword">Create Password</label>

@@ -4,8 +4,8 @@ const SUPABASE_ANON_KEY = 'sb_publishable_VgqXILKX-W4SLAsojQWNGw_ngHksJCU';
 
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-// --- SPAM PREVENTION: 10-minute cooldown per device ---
-const COOLDOWN_MS = 10 * 60 * 1000;
+// --- SPAM PREVENTION: cooldown per device (duration is admin-configurable) ---
+let COOLDOWN_MS = 10 * 60 * 1000; // default 10 min, overwritten by app_settings below
 const COOLDOWN_KEY = "umrfr_last_report_time";
 let cooldownInterval = null;
 
@@ -42,6 +42,7 @@ function startCooldown() {
     };
 
     tick();
+    if (cooldownInterval) clearInterval(cooldownInterval);
     cooldownInterval = setInterval(tick, 1000);
 }
 
@@ -53,6 +54,23 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!session) {
         window.location.href = "student-login.html";
         return;
+    }
+
+    // Auto-logout after 12 hours of no activity
+    UMRFR.startInactivityGuard(supabaseClient, 12 * 60 * 60 * 1000, "student-login.html", "student");
+
+    // Pull the admin-configured cooldown duration (falls back to 10 min if unset)
+    try {
+        const { data: settingRow } = await supabaseClient
+            .from("app_settings")
+            .select("value")
+            .eq("key", "report_cooldown_minutes")
+            .maybeSingle();
+        if (settingRow) {
+            COOLDOWN_MS = parseInt(settingRow.value, 10) * 60 * 1000;
+        }
+    } catch (err) {
+        console.error("Could not load cooldown setting, using default:", err);
     }
 
     // Look up this student's profile to prefill the report and show who's logged in
@@ -104,9 +122,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     faultForm.addEventListener("submit", async (event) => {
         event.preventDefault();
 
-        const originalBtnText = submitBtn.textContent;
-        submitBtn.textContent = "Submitting...";
-        submitBtn.disabled = true;
+        UMRFR.setButtonLoading(submitBtn, true, "Submitting...");
 
         try {
             const reportCode = "UM-" + Math.random().toString(36).substring(2, 7).toUpperCase();
@@ -152,7 +168,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             if (insertError) throw insertError;
 
-            // Start the 10-minute cooldown for this device
+            // Start the cooldown for this device
             localStorage.setItem(COOLDOWN_KEY, Date.now().toString());
 
             // Show success modal instead of a plain alert
@@ -166,7 +182,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             console.error("Error submitting report:", error);
             alert("There was an error submitting your report. Please check your database connection and try again.");
         } finally {
-            submitBtn.textContent = originalBtnText;
+            UMRFR.setButtonLoading(submitBtn, false);
+            submitBtn.disabled = !consentCheck.checked;
         }
     });
 });

@@ -1,6 +1,6 @@
 /* --- ADMIN DASHBOARD STYLES --- */
 .admin-container {
-    max-width: 900px;
+    max-width: 1200px;
     margin: 36px auto;
     padding: 0 20px;
 }
@@ -33,6 +33,105 @@
 
 .logout-btn:hover {
     background: #000;
+}
+
+/* --- SETTINGS CARD --- */
+.admin-settings-card, .admin-roster-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 3px 14px rgba(0,0,0,0.06);
+    border: 1px solid var(--border-soft);
+    padding: 20px 22px;
+    margin-bottom: 24px;
+}
+
+.admin-settings-card h3, .admin-roster-card h3 {
+    color: var(--um-maroon);
+    font-size: 1.05rem;
+    margin-bottom: 4px;
+}
+
+.admin-settings-note {
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    margin-bottom: 14px;
+}
+
+.cooldown-select-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.cooldown-option-btn {
+    padding: 9px 18px;
+    border-radius: 8px;
+    border: 1.5px solid var(--border-soft);
+    background: #fff;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: all 0.15s ease;
+}
+
+.cooldown-option-btn:hover {
+    border-color: var(--um-maroon);
+}
+
+.cooldown-option-btn.active {
+    background: var(--um-maroon);
+    color: #fff;
+    border-color: var(--um-maroon);
+}
+
+/* --- STUDENT ROSTER --- */
+.roster-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 12px;
+}
+
+.roster-card {
+    background: var(--bg-light);
+    border-radius: 10px;
+    padding: 12px 14px;
+    border-left: 4px solid var(--border-soft);
+}
+
+.roster-card.activated { border-left-color: var(--status-completed-text); }
+.roster-card.pending { border-left-color: var(--status-reported-text); }
+
+.roster-card-name {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+}
+
+.roster-card-detail {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+.roster-status-badge {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 20px;
+}
+
+.roster-status-badge.activated {
+    background: var(--status-completed-bg);
+    color: var(--status-completed-text);
+}
+
+.roster-status-badge.pending {
+    background: var(--status-reported-bg);
+    color: var(--status-reported-text);
 }
 
 /* Status Sections */
@@ -73,14 +172,21 @@
     border-radius: 10px;
 }
 
-/* Ticket Card */
+/* Ticket cards: responsive grid — multiple columns on wide screens, one on mobile */
+.admin-tickets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 16px;
+}
+
 .admin-ticket-card {
     background: var(--card-bg);
     border-radius: 12px;
     box-shadow: 0 3px 14px rgba(0,0,0,0.06);
     border: 1px solid var(--border-soft);
     padding: 20px 22px;
-    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
 }
 
 .admin-ticket-top {
@@ -135,17 +241,19 @@
     text-decoration: underline;
 }
 
-/* Status toggle buttons */
+/* Status toggle buttons — own row, wraps if needed */
 .status-toggle-row {
     display: flex;
     gap: 8px;
     margin-top: 16px;
     padding-top: 14px;
     border-top: 1px solid var(--border-soft);
+    flex-wrap: wrap;
 }
 
 .status-btn {
     flex: 1;
+    min-width: 90px;
     padding: 9px 10px;
     border-radius: 8px;
     border: 1.5px solid var(--border-soft);
@@ -181,6 +289,13 @@
     border-color: var(--status-completed-bg);
 }
 
+/* Delete button: its own row below status buttons, never overflows */
+.card-actions-row {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
 .delete-btn {
     padding: 9px 14px;
     border-radius: 8px;
@@ -191,6 +306,7 @@
     font-weight: 700;
     cursor: pointer;
     transition: all 0.15s ease;
+    white-space: nowrap;
 }
 
 .delete-btn:hover {

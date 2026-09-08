@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
     ["forgotCode", "activateCode", "registerCode"].forEach(id => {
         document.getElementById(id).addEventListener("input", (e) => {
-            e.target.value = e.target.value.replace(/[^0-9]/g, "").slice(0, 8);
+            e.target.value = e.target.value.replace(/[^0-9]/g, "").slice(0, 6);
         });
     });
 
@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     // ---------------- STEP 1: FIND ----------------
-    document.getElementById("findBtn").addEventListener("click", async () => {
+    document.getElementById("findBtn").addEventListener("click", async (e) => {
         clearError("findError");
         const studentId = document.getElementById("findStudentId").value.trim();
 
@@ -102,6 +102,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
         pendingStudentId = studentId;
+        UMRFR.setButtonLoading(e.target, true, "Searching...");
 
         try {
             const { data, error } = await supabaseClient
@@ -144,15 +145,18 @@ document.addEventListener("DOMContentLoaded", async () => {
                 document.getElementById("activateOtpFields").style.display = "none";
                 clearError("activateError");
                 showStep("stepActivate");
+                UMRFR.checkExistingCooldown(document.getElementById("activateSendCodeBtn"), "activate_" + data.umdc_email);
             }
         } catch (err) {
             console.error(err);
             showError("findError", "Something went wrong looking that up. Please try again.");
+        } finally {
+            UMRFR.setButtonLoading(e.target, false);
         }
     });
 
     // ---------------- BRANCH A: LOG IN ----------------
-    document.getElementById("loginBtn").addEventListener("click", async () => {
+    document.getElementById("loginBtn").addEventListener("click", async (e) => {
         clearError("loginError");
         const password = document.getElementById("loginPassword").value;
 
@@ -161,6 +165,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             return;
         }
 
+        UMRFR.setButtonLoading(e.target, true, "Logging in...");
         try {
             const { error } = await supabaseClient.auth.signInWithPassword({
                 email: currentStudent.umdc_email,
@@ -171,6 +176,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         } catch (err) {
             console.error(err);
             showError("loginError", "Incorrect password. Please try again.");
+            UMRFR.setButtonLoading(e.target, false);
         }
     });
 
@@ -179,65 +185,75 @@ document.addEventListener("DOMContentLoaded", async () => {
         document.getElementById("forgotOtpFields").style.display = "none";
         clearError("forgotError");
         showStep("stepForgotOtp");
+        UMRFR.checkExistingCooldown(document.getElementById("forgotSendCodeBtn"), "forgot_" + currentStudent.umdc_email);
     });
 
     // ---------------- BRANCH A2: FORGOT PASSWORD ----------------
     document.getElementById("forgotSendCodeBtn").addEventListener("click", async (e) => {
         clearError("forgotError");
+        UMRFR.setButtonLoading(e.target, true, "Sending...");
         try {
             const { error } = await sendOtp(currentStudent.umdc_email, false);
             if (error) throw error;
             document.getElementById("forgotOtpFields").style.display = "block";
-            e.target.textContent = "Code Sent — Resend";
+            UMRFR.setButtonLoading(e.target, false);
+            UMRFR.startSendCooldown(e.target, "forgot_" + currentStudent.umdc_email);
         } catch (err) {
             console.error(err);
             showError("forgotError", "Couldn't send the code. Please try again in a moment.");
+            UMRFR.setButtonLoading(e.target, false);
         }
     });
 
-    document.getElementById("forgotResetBtn").addEventListener("click", async () => {
+    document.getElementById("forgotResetBtn").addEventListener("click", async (e) => {
         clearError("forgotError");
         const code = document.getElementById("forgotCode").value.trim();
         const pw = document.getElementById("forgotNewPassword").value;
         const confirmPw = document.getElementById("forgotConfirmPassword").value;
 
-        if (code.length !== 8) { showError("forgotError", "Enter the 8-character code from your email."); return; }
+        if (code.length !== 6) { showError("forgotError", "Enter the 6-digit code from your email."); return; }
         if (pw.length < 6) { showError("forgotError", "Password must be at least 6 characters."); return; }
         if (pw !== confirmPw) { showError("forgotError", "Passwords don't match."); return; }
 
+        UMRFR.setButtonLoading(e.target, true, "Verifying...");
         try {
             await verifyOtpAndSetPassword(currentStudent.umdc_email, code, pw);
             window.location.href = "report.html";
         } catch (err) {
             console.error(err);
             showError("forgotError", "That code is invalid or has expired. Try sending a new one.");
+            UMRFR.setButtonLoading(e.target, false);
         }
     });
 
     // ---------------- BRANCH B: ACTIVATE EXISTING ROSTER ROW ----------------
     document.getElementById("activateSendCodeBtn").addEventListener("click", async (e) => {
         clearError("activateError");
+        UMRFR.setButtonLoading(e.target, true, "Sending...");
         try {
             const { error } = await sendOtp(currentStudent.umdc_email, true);
             if (error) throw error;
             document.getElementById("activateOtpFields").style.display = "block";
-            e.target.textContent = "Code Sent — Resend";
+            UMRFR.setButtonLoading(e.target, false);
+            UMRFR.startSendCooldown(e.target, "activate_" + currentStudent.umdc_email);
         } catch (err) {
             console.error(err);
             showError("activateError", "Couldn't send the code. Please try again in a moment.");
+            UMRFR.setButtonLoading(e.target, false);
         }
     });
 
-    document.getElementById("activateBtn").addEventListener("click", async () => {
+    document.getElementById("activateBtn").addEventListener("click", async (e) => {
         clearError("activateError");
         const code = document.getElementById("activateCode").value.trim();
         const pw = document.getElementById("activatePassword").value;
         const confirmPw = document.getElementById("activateConfirmPassword").value;
 
-        if (code.length !== 8) { showError("activateError", "Enter the 8-character code from your email."); return; }
+        if (code.length !== 6) { showError("activateError", "Enter the 6-digit code from your email."); return; }
         if (pw.length < 6) { showError("activateError", "Password must be at least 6 characters."); return; }
         if (pw !== confirmPw) { showError("activateError", "Passwords don't match."); return; }
 
+        UMRFR.setButtonLoading(e.target, true, "Verifying...");
         try {
             const authData = await verifyOtpAndSetPassword(currentStudent.umdc_email, code, pw);
             const userId = authData.user.id;
@@ -252,6 +268,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         } catch (err) {
             console.error(err);
             showError("activateError", "That code is invalid or has expired. Try sending a new one.");
+            UMRFR.setButtonLoading(e.target, false);
         }
     });
 
@@ -277,28 +294,32 @@ document.addEventListener("DOMContentLoaded", async () => {
             return;
         }
 
+        UMRFR.setButtonLoading(e.target, true, "Sending...");
         try {
             const { error } = await sendOtp(email, true);
             if (error) throw error;
             document.getElementById("registerOtpFields").style.display = "block";
-            e.target.textContent = "Code Sent — Resend";
+            UMRFR.setButtonLoading(e.target, false);
+            UMRFR.startSendCooldown(e.target, "register_" + email);
         } catch (err) {
             console.error(err);
             showError("registerError", "Couldn't send the code. Please try again in a moment.");
+            UMRFR.setButtonLoading(e.target, false);
         }
     });
 
-    document.getElementById("registerCreateBtn").addEventListener("click", async () => {
+    document.getElementById("registerCreateBtn").addEventListener("click", async (e) => {
         clearError("registerOtpError");
         const code = document.getElementById("registerCode").value.trim();
         const pw = document.getElementById("registerPassword").value;
         const confirmPw = document.getElementById("registerConfirmPassword").value;
         const email = document.getElementById("regEmail").value.trim().toLowerCase();
 
-        if (code.length !== 8) { showError("registerOtpError", "Enter the 8-character code from your email."); return; }
+        if (code.length !== 6) { showError("registerOtpError", "Enter the 6-digit code from your email."); return; }
         if (pw.length < 6) { showError("registerOtpError", "Password must be at least 6 characters."); return; }
         if (pw !== confirmPw) { showError("registerOtpError", "Passwords don't match."); return; }
 
+        UMRFR.setButtonLoading(e.target, true, "Creating account...");
         try {
             const authData = await verifyOtpAndSetPassword(email, code, pw);
             const userId = authData.user.id;
@@ -319,6 +340,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         } catch (err) {
             console.error(err);
             showError("registerOtpError", "That code is invalid or has expired. Try sending a new one.");
+            UMRFR.setButtonLoading(e.target, false);
         }
     });
 });

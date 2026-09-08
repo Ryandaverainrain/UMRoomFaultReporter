@@ -244,6 +244,33 @@ header {
 .badge-processing { background-color: var(--status-processing-bg); color: var(--status-processing-text); }
 .badge-completed { background-color: var(--status-completed-bg); color: var(--status-completed-text); }
 
+/* --- LOADING SPINNER (used on all async buttons) --- */
+@keyframes umrfr-spin {
+    to { transform: rotate(360deg); }
+}
+
+.btn-spinner {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border: 2px solid rgba(255,255,255,0.4);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: umrfr-spin 0.7s linear infinite;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+.btn-secondary .btn-spinner {
+    border: 2px solid rgba(122,12,30,0.25);
+    border-top-color: var(--um-maroon);
+}
+
+button:disabled {
+    opacity: 0.75;
+    cursor: not-allowed;
+}
+
 /* --- DISCLAIMER MODAL STYLES --- */
 .modal-overlay {
     position: fixed;
