@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UMRoomFaultReporter | Admin Dashboard</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/style.css?v=20260909a">
+    <link rel="stylesheet" href="css/admin.css?v=20260909a">
 </head>
 <body>
 
@@ -56,9 +56,14 @@
 
             <!-- STUDENT ROSTER -->
             <div class="admin-roster-card">
-                <h3>Student Roster</h3>
-                <p class="admin-settings-note">Everyone in the database, activated or not. Passwords and emails aren't shown here.</p>
-                <div id="rosterGrid" class="roster-grid">
+                <div class="roster-header-row">
+                    <div>
+                        <h3>Student Roster</h3>
+                        <p class="admin-settings-note">Everyone in the database, activated or not. Passwords and emails aren't shown here.</p>
+                    </div>
+                    <button type="button" id="rosterToggleBtn" class="roster-toggle-btn">Show Roster</button>
+                </div>
+                <div id="rosterGrid" class="roster-grid" style="display:none;">
                     <p class="admin-empty-note">Loading roster...</p>
                 </div>
             </div>
@@ -71,7 +76,7 @@
 
     <!-- SUPABASE & SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="js/main.js"></script>
-    <script src="js/admin.js"></script>
+    <script src="js/main.js?v=20260909a"></script>
+    <script src="js/admin.js?v=20260909a"></script>
 </body>
 </html>

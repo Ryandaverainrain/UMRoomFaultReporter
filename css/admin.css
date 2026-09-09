@@ -57,6 +57,32 @@
     margin-bottom: 14px;
 }
 
+.roster-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.roster-toggle-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1.5px solid var(--um-maroon);
+    background: #fff;
+    color: var(--um-maroon);
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s ease;
+}
+
+.roster-toggle-btn:hover {
+    background: var(--um-maroon);
+    color: #fff;
+}
+
 .cooldown-select-row {
     display: flex;
     gap: 8px;

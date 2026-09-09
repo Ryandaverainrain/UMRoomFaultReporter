@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     loadAdminTickets();
     loadRoster();
+    initRosterToggle();
     initCooldownSettings();
 
     const handleLogout = async () => {
@@ -55,7 +56,10 @@ async function checkAdminSession() {
         .maybeSingle();
 
     if (error || !data) {
-        alert("This account isn't authorized for admin access.");
+        // Not an admin — quietly send them to the login page.
+        // (The informative error is shown on login.html itself when someone
+        // actually attempts to log in; this is just a safety net for anyone
+        // reaching admin.html directly, e.g. via a bookmark or stale session.)
         await supabaseClient.auth.signOut();
         window.location.href = "login.html";
         return false;
@@ -104,8 +108,19 @@ async function initCooldownSettings() {
 }
 
 // ---------------- STUDENT ROSTER ----------------
+function initRosterToggle() {
+    const btn = document.getElementById("rosterToggleBtn");
+    const grid = document.getElementById("rosterGrid");
+    btn.addEventListener("click", () => {
+        const isHidden = grid.style.display === "none";
+        grid.style.display = isHidden ? "grid" : "none";
+        btn.textContent = isHidden ? "Hide Roster" : btn.dataset.showLabel || "Show Roster";
+    });
+}
+
 async function loadRoster() {
     const grid = document.getElementById("rosterGrid");
+    const toggleBtn = document.getElementById("rosterToggleBtn");
     try {
         const { data: students, error } = await supabaseClient
             .from("students")
@@ -113,6 +128,10 @@ async function loadRoster() {
             .order("last_name", { ascending: true });
 
         if (error) throw error;
+
+        const label = `Show Roster (${students ? students.length : 0})`;
+        toggleBtn.dataset.showLabel = label;
+        if (grid.style.display === "none") toggleBtn.textContent = label;
 
         if (!students || students.length === 0) {
             grid.innerHTML = "<p class='admin-empty-note'>No students in the database yet.</p>";
