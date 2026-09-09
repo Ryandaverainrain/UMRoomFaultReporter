@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
     ["forgotCode", "activateCode", "registerCode"].forEach(id => {
         document.getElementById(id).addEventListener("input", (e) => {
-            e.target.value = e.target.value.replace(/[^0-9]/g, "").slice(0, 6);
+            e.target.value = e.target.value.replace(/[^0-9]/g, "").slice(0, 10);
         });
     });
 
@@ -211,7 +211,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const pw = document.getElementById("forgotNewPassword").value;
         const confirmPw = document.getElementById("forgotConfirmPassword").value;
 
-        if (code.length !== 6) { showError("forgotError", "Enter the 6-digit code from your email."); return; }
+        if (code.length < 6 || code.length > 10) { showError("forgotError", "Enter the code from your email."); return; }
         if (pw.length < 6) { showError("forgotError", "Password must be at least 6 characters."); return; }
         if (pw !== confirmPw) { showError("forgotError", "Passwords don't match."); return; }
 
@@ -249,7 +249,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const pw = document.getElementById("activatePassword").value;
         const confirmPw = document.getElementById("activateConfirmPassword").value;
 
-        if (code.length !== 6) { showError("activateError", "Enter the 6-digit code from your email."); return; }
+        if (code.length < 6 || code.length > 10) { showError("activateError", "Enter the code from your email."); return; }
         if (pw.length < 6) { showError("activateError", "Password must be at least 6 characters."); return; }
         if (pw !== confirmPw) { showError("activateError", "Passwords don't match."); return; }
 
@@ -315,7 +315,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const confirmPw = document.getElementById("registerConfirmPassword").value;
         const email = document.getElementById("regEmail").value.trim().toLowerCase();
 
-        if (code.length !== 6) { showError("registerOtpError", "Enter the 6-digit code from your email."); return; }
+        if (code.length < 6 || code.length > 10) { showError("registerOtpError", "Enter the code from your email."); return; }
         if (pw.length < 6) { showError("registerOtpError", "Password must be at least 6 characters."); return; }
         if (pw !== confirmPw) { showError("registerOtpError", "Passwords don't match."); return; }
 
