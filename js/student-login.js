@@ -26,6 +26,18 @@ function clearError(elId) {
     el.classList.remove("visible");
 }
 
+function showBanner(type, message) {
+    const banner = document.getElementById("findResultBanner");
+    const icon = type === "success" ? "✓" : "✕";
+    banner.className = `status-banner ${type}`;
+    banner.innerHTML = `<span class="status-banner-icon">${icon}</span> ${message}`;
+    banner.style.display = "flex";
+}
+
+function hideBanner() {
+    document.getElementById("findResultBanner").style.display = "none";
+}
+
 // --- Shared OTP helpers (this is the core mechanic — see database_accounts_setup.sql notes) ---
 async function sendOtp(email, shouldCreateUser) {
     return await supabaseClient.auth.signInWithOtp({
@@ -59,7 +71,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // If already logged in, skip straight to the report form
     const { data: { session } } = await supabaseClient.auth.getSession();
     if (session) {
-        window.location.href = "report.html";
+        window.location.href = "student-dashboard.html";
         return;
     }
 
@@ -88,6 +100,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         pendingStudentId = "";
         document.getElementById("findStudentId").value = "";
         clearError("findError");
+        hideBanner();
         showStep("stepFind");
     });
 
@@ -117,6 +130,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 // Branch C: no account at all
                 currentStudent = null;
                 clearError("registerError");
+                showBanner("error", "Account not found. Fill in your details below to create one.");
                 document.getElementById("regLastName").value = "";
                 document.getElementById("regFirstName").value = "";
                 document.getElementById("regProgram").value = "";
@@ -131,6 +145,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             if (data.user_id) {
                 // Branch A: exists and activated
+                showBanner("success", "Account found! Enter your password to log in.");
                 document.getElementById("loginName").textContent = fullName;
                 document.getElementById("loginProgram").textContent = data.year_program;
                 document.getElementById("loginEmail").textContent = data.umdc_email;
@@ -139,6 +154,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 showStep("stepLogin");
             } else {
                 // Branch B: exists but no password yet (pre-loaded roster)
+                showBanner("success", "Account found! Set up a password to activate it.");
                 document.getElementById("activateName").textContent = fullName;
                 document.getElementById("activateProgram").textContent = data.year_program;
                 document.getElementById("activateEmail").textContent = data.umdc_email;
@@ -172,7 +188,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 password
             });
             if (error) throw error;
-            window.location.href = "report.html";
+            window.location.href = "student-dashboard.html";
         } catch (err) {
             console.error(err);
             showError("loginError", "Incorrect password. Please try again.");
@@ -218,7 +234,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         UMRFR.setButtonLoading(e.target, true, "Verifying...");
         try {
             await verifyOtpAndSetPassword(currentStudent.umdc_email, code, pw);
-            window.location.href = "report.html";
+            window.location.href = "student-dashboard.html";
         } catch (err) {
             console.error(err);
             showError("forgotError", "That code is invalid or has expired. Try sending a new one.");
@@ -264,7 +280,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 .eq("id", currentStudent.id);
 
             if (claimError) throw claimError;
-            window.location.href = "report.html";
+            window.location.href = "student-dashboard.html";
         } catch (err) {
             console.error(err);
             showError("activateError", "That code is invalid or has expired. Try sending a new one.");
@@ -336,7 +352,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 }]);
 
             if (insertError) throw insertError;
-            window.location.href = "report.html";
+            window.location.href = "student-dashboard.html";
         } catch (err) {
             console.error(err);
             showError("registerOtpError", "That code is invalid or has expired. Try sending a new one.");

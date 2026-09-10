@@ -10,7 +10,15 @@ const SECTIONS = [
     { status: "Completed", label: "Completed", cls: "completed" }
 ];
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+    // Active Reports now requires login — no more public access
+    const { data: { session } } = await supabaseClient.auth.getSession();
+    if (!session) {
+        window.location.href = "student-login.html";
+        return;
+    }
+    UMRFR.startInactivityGuard(supabaseClient, 12 * 60 * 60 * 1000, "student-login.html", "student");
+
     loadTickets();
 
     const searchInput = document.getElementById("searchInput");

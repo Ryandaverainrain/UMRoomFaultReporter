@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UMRoomFaultReporter | Student Login</title>
-    <link rel="stylesheet" href="css/style.css?v=20260909b">
-    <link rel="stylesheet" href="css/report.css?v=20260909b">
-    <link rel="stylesheet" href="css/student-login.css?v=20260909b">
+    <link rel="stylesheet" href="css/style.css?v=20260909c">
+    <link rel="stylesheet" href="css/report.css?v=20260909c">
+    <link rel="stylesheet" href="css/student-login.css?v=20260909c">
 </head>
 <body>
 
@@ -17,7 +17,7 @@
             </a>
             <div class="system-title">
                 <h1>UMRoomFaultReporter</h1>
-                <p>Classroom Fault Reporter</p>
+                <p>UM Digos College — Classroom Fault Reporter</p>
             </div>
         </div>
         <div class="header-actions">
@@ -47,6 +47,9 @@
             <p class="field-error" id="findError"></p>
             <button type="button" id="findBtn" class="btn btn-primary">Find My Account</button>
         </div>
+
+        <!-- shared result banner, shown after "Find My Account" -->
+        <div id="findResultBanner" class="status-banner" style="display:none;"></div>
 
         <!-- ============ BRANCH A: ACCOUNT EXISTS + ACTIVATED ============ -->
         <div id="stepLogin" style="display:none;">
@@ -188,7 +191,7 @@
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="js/main.js?v=20260909b"></script>
-    <script src="js/student-login.js?v=20260909b"></script>
+    <script src="js/main.js?v=20260909c"></script>
+    <script src="js/student-login.js?v=20260909c"></script>
 </body>
 </html>

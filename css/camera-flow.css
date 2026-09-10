@@ -1,0 +1,152 @@
+.camera-overlay {
+    position: fixed;
+    inset: 0;
+    background: #0A0A0A;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+}
+
+.camera-step {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.camera-step-inner {
+    max-width: 400px;
+    text-align: center;
+    padding: 30px;
+    color: #fff;
+}
+
+.camera-step-inner h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+    color: var(--um-gold);
+}
+
+.camera-step-inner p {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: #E5E1DC;
+    margin-bottom: 22px;
+}
+
+.camera-step-inner .btn {
+    margin-bottom: 12px;
+}
+
+/* Live camera view */
+#camStepLive {
+    background: #000;
+}
+
+#camVideo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.camera-live-controls {
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+
+.camera-icon-btn {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    border: none;
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.camera-icon-btn.active {
+    background: var(--um-gold);
+    color: #000;
+}
+
+.camera-shutter-btn {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: #fff;
+    border: 5px solid rgba(255,255,255,0.4);
+    cursor: pointer;
+}
+
+/* Review view */
+.camera-review-img {
+    max-width: 100%;
+    max-height: 78vh;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.camera-review-controls {
+    display: flex;
+    gap: 14px;
+    margin-top: 20px;
+}
+
+.camera-review-controls .btn {
+    margin-top: 0;
+    min-width: 130px;
+}
+
+/* Annotate view */
+#camStepAnnotate {
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.camera-annotate-hint {
+    color: #fff;
+    font-size: 0.85rem;
+    text-align: center;
+    margin-bottom: 12px;
+    max-width: 400px;
+}
+
+.camera-canvas-wrap {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    overflow: hidden;
+}
+
+#camAnnotateCanvas {
+    max-width: 100%;
+    max-height: 68vh;
+    touch-action: none;
+    border-radius: 8px;
+    cursor: crosshair;
+}
+
+.camera-annotate-controls {
+    display: flex;
+    gap: 14px;
+    margin-top: 16px;
+}
+
+.camera-annotate-controls .btn {
+    margin-top: 0;
+    min-width: 130px;
+}

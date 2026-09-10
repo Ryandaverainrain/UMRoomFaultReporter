@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UMRoomFaultReporter | My Reports</title>
+    <link rel="stylesheet" href="css/style.css?v=20260909c">
+    <link rel="stylesheet" href="css/reports.css?v=20260909c">
+    <link rel="stylesheet" href="css/my-reports.css?v=20260909c">
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <a href="https://digos.umindanao.edu.ph/" target="_blank">
+                <img src="img/um-logo.png" alt="UM Logo" class="um-logo-img">
+            </a>
+            <div class="system-title">
+                <h1>UMRoomFaultReporter</h1>
+                <p>UM Digos College — Classroom Fault Reporter</p>
+            </div>
+        </div>
+        <div class="header-actions">
+            <a href="student-dashboard.html" class="home-btn" aria-label="Dashboard">
+                <svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v10h14V10"/><path d="M9.5 20v-6h5v6"/></svg>
+            </a>
+            <button class="menu-btn" id="menuToggle">☰</button>
+        </div>
+        <div class="dropdown-menu" id="dropdownMenu">
+            <a href="student-dashboard.html">Dashboard</a>
+            <a href="report.html">Report a Fault</a>
+            <a href="reports.html">Active Reports</a>
+        </div>
+    </header>
+
+    <main class="reports-container">
+        <h2>My Reports</h2>
+        <p>Reports you've submitted. You can edit the details if something changes.</p>
+
+        <div id="myReportsGrid" class="tickets-grid">
+            <p class="loading-text">Loading your reports...</p>
+        </div>
+    </main>
+
+    <!-- EDIT MODAL -->
+    <div id="editModal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 480px; text-align: left;">
+            <h2>Edit Report</h2>
+            <div class="form-group">
+                <label for="editClassroomName">Room</label>
+                <input type="text" id="editClassroomName" maxlength="6">
+            </div>
+            <div class="form-group">
+                <label for="editEquipmentName">Equipment</label>
+                <input type="text" id="editEquipmentName" maxlength="50">
+            </div>
+            <div class="form-group">
+                <label for="editLocationInRoom">Exact Spot in the Room</label>
+                <input type="text" id="editLocationInRoom" maxlength="60">
+            </div>
+            <div class="form-group">
+                <label for="editDescription">What's Wrong</label>
+                <textarea id="editDescription" rows="3" maxlength="500"></textarea>
+            </div>
+            <p class="field-error" id="editError"></p>
+            <div style="display:flex; gap:10px; margin-top: 10px;">
+                <button type="button" id="editCancelBtn" class="btn btn-secondary" style="margin-top:0;">Cancel</button>
+                <button type="button" id="editSaveBtn" class="btn btn-primary" style="margin-top:0;">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/main.js?v=20260909c"></script>
+    <script src="js/my-reports.js?v=20260909c"></script>
+</body>
+</html>

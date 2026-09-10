@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UMRoomFaultReporter | Student Dashboard</title>
+    <link rel="stylesheet" href="css/style.css?v=20260909c">
+    <link rel="stylesheet" href="css/student-dashboard.css?v=20260909c">
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <a href="https://digos.umindanao.edu.ph/" target="_blank">
+                <img src="img/um-logo.png" alt="UM Logo" class="um-logo-img">
+            </a>
+            <div class="system-title">
+                <h1>UMRoomFaultReporter</h1>
+                <p>UM Digos College — Classroom Fault Reporter</p>
+            </div>
+        </div>
+        <div class="header-actions">
+            <a href="index.html" class="home-btn" aria-label="Home">
+                <svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v10h14V10"/><path d="M9.5 20v-6h5v6"/></svg>
+            </a>
+            <button class="menu-btn" id="menuToggle">☰</button>
+        </div>
+        <div class="dropdown-menu" id="dropdownMenu">
+            <a href="index.html">Home</a>
+            <a href="about.html">About the System</a>
+            <a href="login.html">Admin Login</a>
+        </div>
+    </header>
+
+    <main class="dashboard-container">
+        <div class="dashboard-welcome-row">
+            <div class="dashboard-avatar" id="dashboardAvatar">?</div>
+            <div>
+                <h2 id="dashboardWelcome">Welcome!</h2>
+                <p class="subtext" id="dashboardSub"></p>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+            <a href="report.html" class="dashboard-card">
+                <div class="dashboard-card-icon">📋</div>
+                <h3>Report a Fault</h3>
+                <p>Spotted something broken? Report it here.</p>
+            </a>
+            <a href="reports.html" class="dashboard-card">
+                <div class="dashboard-card-icon">🗂️</div>
+                <h3>Active Reports</h3>
+                <p>Browse all reports and their status.</p>
+            </a>
+            <a href="my-reports.html" class="dashboard-card">
+                <div class="dashboard-card-icon">📄</div>
+                <h3>My Reports</h3>
+                <p>View and edit reports you've submitted.</p>
+            </a>
+            <a href="profile.html" class="dashboard-card">
+                <div class="dashboard-card-icon">👤</div>
+                <h3>Profile Settings</h3>
+                <p>Manage your account.</p>
+            </a>
+        </div>
+
+        <button type="button" id="logoutBtn" class="link-btn" style="margin-top: 24px;">Log Out</button>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/main.js?v=20260909c"></script>
+    <script src="js/student-dashboard.js?v=20260909c"></script>
+</body>
+</html>

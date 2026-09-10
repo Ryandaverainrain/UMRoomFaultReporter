@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UMRoomFaultReporter | Profile</title>
+    <link rel="stylesheet" href="css/style.css?v=20260909c">
+    <link rel="stylesheet" href="css/student-dashboard.css?v=20260909c">
+    <style>
+        .profile-card {
+            max-width: 420px;
+            margin: 60px auto;
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+            border: 1px solid var(--border-soft);
+        }
+        .profile-avatar-large {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: var(--um-maroon);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+            margin: 0 auto 16px;
+        }
+        .profile-card h2 { color: var(--um-maroon); margin-bottom: 2px; }
+        .profile-card p.role { color: var(--text-muted); font-size: 0.88rem; margin-bottom: 24px; }
+        .profile-coming-soon {
+            background: var(--bg-light);
+            border-radius: 10px;
+            padding: 16px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <a href="https://digos.umindanao.edu.ph/" target="_blank">
+                <img src="img/um-logo.png" alt="UM Logo" class="um-logo-img">
+            </a>
+            <div class="system-title">
+                <h1>UMRoomFaultReporter</h1>
+                <p>UM Digos College — Classroom Fault Reporter</p>
+            </div>
+        </div>
+        <div class="header-actions">
+            <a href="index.html" class="home-btn" aria-label="Home">
+                <svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v10h14V10"/><path d="M9.5 20v-6h5v6"/></svg>
+            </a>
+            <button class="menu-btn" id="menuToggle">☰</button>
+        </div>
+        <div class="dropdown-menu" id="dropdownMenu">
+            <a href="student-dashboard.html">Dashboard</a>
+            <a href="index.html">Home</a>
+            <a href="login.html">Admin Login</a>
+        </div>
+    </header>
+
+    <main class="profile-card">
+        <div class="profile-avatar-large" id="profileAvatar">?</div>
+        <h2 id="profileName">Loading...</h2>
+        <p class="role" id="profileRole"></p>
+
+        <div class="profile-coming-soon">
+            Profile settings are coming in a future update. For now you can view your info here.
+        </div>
+
+        <p style="margin-top: 20px;"><a href="student-dashboard.html" class="link-btn">← Back to Dashboard</a></p>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/main.js?v=20260909c"></script>
+    <script src="js/profile.js?v=20260909c"></script>
+</body>
+</html>
