@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UMRoomFaultReporter | Student Dashboard</title>
-    <link rel="stylesheet" href="css/style.css?v=20260909c">
-    <link rel="stylesheet" href="css/student-dashboard.css?v=20260909c">
+    <link rel="stylesheet" href="css/style.css?v=20260909e">
+    <link rel="stylesheet" href="css/student-dashboard.css?v=20260909e">
 </head>
 <body>
 
@@ -33,13 +33,16 @@
     </header>
 
     <main class="dashboard-container">
-        <div class="dashboard-welcome-row">
+        <a href="profile.html" class="dashboard-identity">
             <div class="dashboard-avatar" id="dashboardAvatar">?</div>
-            <div>
+            <div class="dashboard-identity-text">
                 <h2 id="dashboardWelcome">Welcome!</h2>
                 <p class="subtext" id="dashboardSub"></p>
             </div>
-        </div>
+            <div class="dashboard-identity-arrow">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            </div>
+        </a>
 
         <div class="dashboard-grid">
             <a href="report.html" class="dashboard-card">
@@ -57,18 +60,13 @@
                 <h3>My Reports</h3>
                 <p>View and edit reports you've submitted.</p>
             </a>
-            <a href="profile.html" class="dashboard-card">
-                <div class="dashboard-card-icon">👤</div>
-                <h3>Profile Settings</h3>
-                <p>Manage your account.</p>
-            </a>
         </div>
 
         <button type="button" id="logoutBtn" class="link-btn" style="margin-top: 24px;">Log Out</button>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="js/main.js?v=20260909c"></script>
-    <script src="js/student-dashboard.js?v=20260909c"></script>
+    <script src="js/main.js?v=20260909e"></script>
+    <script src="js/student-dashboard.js?v=20260909e"></script>
 </body>
 </html>

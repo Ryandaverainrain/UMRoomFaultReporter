@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UMRoomFaultReporter | Student Login</title>
-    <link rel="stylesheet" href="css/style.css?v=20260909c">
-    <link rel="stylesheet" href="css/report.css?v=20260909c">
-    <link rel="stylesheet" href="css/student-login.css?v=20260909c">
+    <link rel="stylesheet" href="css/style.css?v=20260909e">
+    <link rel="stylesheet" href="css/report.css?v=20260909e">
+    <link rel="stylesheet" href="css/student-login.css?v=20260909e">
 </head>
 <body>
 
@@ -190,8 +190,18 @@
         <button type="button" id="startOverBtn" class="link-btn" style="display:none;">← Use a different Student ID</button>
     </main>
 
+    <!-- CHECK YOUR EMAIL REMINDER -->
+    <div id="emailSentModal" class="modal-overlay">
+        <div class="modal-content">
+            <h2>📧 Check Your Email</h2>
+            <p>We just sent a 6-digit code to your <strong>@umindanao.edu.ph</strong> email — the one UMDC issued you.</p>
+            <p>Open Gmail and check your inbox. Don't see it? Check your <strong>Spam</strong> folder too — school domain emails sometimes land there.</p>
+            <button type="button" id="emailSentOkBtn" class="btn btn-primary">Got it</button>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="js/main.js?v=20260909c"></script>
-    <script src="js/student-login.js?v=20260909c"></script>
+    <script src="js/main.js?v=20260909e"></script>
+    <script src="js/student-login.js?v=20260909e"></script>
 </body>
 </html>

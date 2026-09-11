@@ -67,8 +67,9 @@ async function loadMyReports() {
                         <span class="badge ${badgeClass}">${ticket.status}</span>
                     </div>
                     <div class="ticket-details">
-                        <p><strong>Room:</strong> ${ticket.classroom_name}${ticket.location_in_room ? " — " + ticket.location_in_room : ""}</p>
+                <p><strong>Room:</strong> ${ticket.classroom_name}${ticket.location_in_room ? " — " + ticket.location_in_room : ""}</p>
                         <p><strong>Equipment:</strong> ${ticket.equipment_name}</p>
+                        ${ticket.reference_point ? `<p class="ticket-ref-point">📸 Photo shot at: ${ticket.reference_point === "Whiteboard" ? "Near Whiteboard" : "Near Entrance/Exit"}</p>` : ""}
                     </div>
                     <div class="ticket-description">"${ticket.issue_description}"</div>
                     <div class="ticket-date">Submitted: ${submittedDate}</div>

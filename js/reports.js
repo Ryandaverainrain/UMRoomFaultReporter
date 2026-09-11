@@ -55,6 +55,7 @@ function buildCard(ticket) {
                 <p><strong>Room:</strong> ${ticket.classroom_name}${ticket.location_in_room ? " — " + ticket.location_in_room : ""}</p>
                 <p><strong>Equipment:</strong> ${ticket.equipment_name}</p>
                 <p><strong>Reporter:</strong> ${ticket.reporter_name} (${ticket.reporter_type})</p>
+                ${ticket.reference_point ? `<p class="ticket-ref-point">📸 Photo shot at: ${ticket.reference_point === "Whiteboard" ? "Near Whiteboard" : "Near Entrance/Exit"}</p>` : ""}
             </div>
             <div class="ticket-description">
                 "${ticket.issue_description}"

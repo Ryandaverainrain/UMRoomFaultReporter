@@ -180,6 +180,7 @@ function buildAdminCard(ticket) {
         </div>
         <p class="admin-ticket-details"><strong>Reported by:</strong> ${ticket.reporter_name} (${ticket.reporter_type})</p>
         <p class="admin-ticket-details"><strong>Spot in room:</strong> ${ticket.location_in_room || "—"}</p>
+        ${ticket.reference_point ? `<p class="admin-ticket-details ticket-ref-point">📸 Photo shot at: ${ticket.reference_point === "Whiteboard" ? "Near Whiteboard" : "Near Entrance/Exit"}</p>` : ""}
         <div class="admin-ticket-desc">"${ticket.issue_description}"</div>
         ${imageLink}
         <div class="status-toggle-row">

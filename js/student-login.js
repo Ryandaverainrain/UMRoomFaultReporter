@@ -38,6 +38,10 @@ function hideBanner() {
     document.getElementById("findResultBanner").style.display = "none";
 }
 
+function showEmailSentModal() {
+    document.getElementById("emailSentModal").style.display = "flex";
+}
+
 // --- Shared OTP helpers (this is the core mechanic — see database_accounts_setup.sql notes) ---
 async function sendOtp(email, shouldCreateUser) {
     return await supabaseClient.auth.signInWithOtp({
@@ -83,6 +87,10 @@ document.addEventListener("DOMContentLoaded", async () => {
             input.type = isHidden ? "text" : "password";
             btn.textContent = isHidden ? "HIDE" : "SHOW";
         });
+    });
+
+    document.getElementById("emailSentOkBtn").addEventListener("click", () => {
+        document.getElementById("emailSentModal").style.display = "none";
     });
 
     // Numeric-only filters
@@ -214,6 +222,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             document.getElementById("forgotOtpFields").style.display = "block";
             UMRFR.setButtonLoading(e.target, false);
             UMRFR.startSendCooldown(e.target, "forgot_" + currentStudent.umdc_email);
+            showEmailSentModal();
         } catch (err) {
             console.error(err);
             showError("forgotError", "Couldn't send the code. Please try again in a moment.");
@@ -252,6 +261,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             document.getElementById("activateOtpFields").style.display = "block";
             UMRFR.setButtonLoading(e.target, false);
             UMRFR.startSendCooldown(e.target, "activate_" + currentStudent.umdc_email);
+            showEmailSentModal();
         } catch (err) {
             console.error(err);
             showError("activateError", "Couldn't send the code. Please try again in a moment.");
@@ -317,6 +327,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             document.getElementById("registerOtpFields").style.display = "block";
             UMRFR.setButtonLoading(e.target, false);
             UMRFR.startSendCooldown(e.target, "register_" + email);
+            showEmailSentModal();
         } catch (err) {
             console.error(err);
             showError("registerError", "Couldn't send the code. Please try again in a moment.");

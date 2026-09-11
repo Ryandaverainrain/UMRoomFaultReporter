@@ -119,6 +119,12 @@
     color: var(--text-dark);
 }
 
+.ticket-ref-point {
+    color: var(--um-maroon) !important;
+    font-weight: 600;
+    font-size: 0.82rem !important;
+}
+
 .ticket-description {
     font-size: 0.85rem;
     color: var(--text-dark);
